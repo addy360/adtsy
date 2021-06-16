@@ -16,7 +16,7 @@ import { categories } from "./testData";
 const Item = ({ cat }) => (
   <View style={styles.carouselItem}>
     <ImageBackground
-      source={{ uri: "https://picsum.photos/id/237/200/300" }}
+      source={{ uri: cat.categoryImg }}
       style={styles.carouselItemImage}
       resizeMode="cover"
     >
