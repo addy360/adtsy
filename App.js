@@ -8,9 +8,27 @@ import {
   StatusBar,
   Image,
   ImageBackground,
+  FlatList,
 } from "react-native";
 
 import { categories } from "./testData";
+
+const Item = ({ cat }) => (
+  <View style={styles.carouselItem}>
+    <ImageBackground
+      source={{ uri: "https://picsum.photos/id/237/200/300" }}
+      style={styles.carouselItemImage}
+      resizeMode="cover"
+    >
+      <Text style={styles.carouselItemText}>
+        {cat.categoryName} Lorem ipsum dolor sit amet consectetur, adipisicing
+        elit. Praesentium nam maiores magni officia hic recusandae excepturi
+        corrupti assumenda exercitationem similique blanditiis vero repellendus
+        vel eos aliquid in ullam, unde modi.{" "}
+      </Text>
+    </ImageBackground>
+  </View>
+);
 
 export default function App() {
   const categoryData = categories(10);
@@ -46,23 +64,34 @@ export default function App() {
             showsHorizontalScrollIndicator={false}
           >
             {categoryData.map((cat, i) => (
-              <View style={styles.carouselItem} key={i}>
-                <ImageBackground
-                  source={{ uri: "https://picsum.photos/id/237/200/300" }}
-                  style={styles.carouselItemImage}
-                  resizeMode="cover"
-                >
-                  <Text style={styles.carouselItemText}>
-                    {cat.categoryName} Lorem ipsum dolor sit amet consectetur,
-                    adipisicing elit. Praesentium nam maiores magni officia hic
-                    recusandae excepturi corrupti assumenda exercitationem
-                    similique blanditiis vero repellendus vel eos aliquid in
-                    ullam, unde modi.{" "}
-                  </Text>
-                </ImageBackground>
-              </View>
+              <Item key={i} cat={cat} />
             ))}
           </ScrollView>
+        </View>
+
+        <View style={styles.carousel}>
+          <ScrollView
+            style={{
+              ...styles.carouselContainer,
+            }}
+            snapToAlignment
+            bounces
+            fadingEdgeLength={30}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          >
+            {categoryData.map((cat, i) => (
+              <Item key={i} cat={cat} />
+            ))}
+          </ScrollView>
+        </View>
+        <View>
+          <FlatList
+            data={categoryData}
+            renderItem={({ item }) => <Item cat={item} />}
+            keyExtractor={({ categoryId }) => categoryId.toString()}
+            horizontal
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
