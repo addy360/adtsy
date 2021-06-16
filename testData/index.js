@@ -13,3 +13,20 @@ export const categories = (items) => {
     categoryImg: img,
   }));
 };
+
+export const users = () => {
+  return [
+    {
+      name: "Jane Doe",
+      avatar_url:
+        "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+      subtitle: "Vice President",
+    },
+    {
+      name: "John Doe",
+      avatar_url:
+        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+      subtitle: "Vice Chairman",
+    },
+  ];
+};
